@@ -7,7 +7,8 @@ Template thiệp cưới online hoàn chỉnh, mobile-first, deploy được nga
 ```
 wedding-website/
 ├── index.html              ← Trang chính (toàn bộ UI)
-├── config.json             ← ⭐ File cấu hình - chỉnh ở đây!
+├── config.json             ← File dữ liệu chi tiết
+├── settings.json           ← ⭐ File setting nhanh (tên, khách, ảnh)
 ├── google-apps-script.js   ← Script kết nối Google Sheets
 ├── generate-links.js       ← Script tạo link mời khách
 ├── vercel.json             ← Cấu hình deploy Vercel
@@ -31,9 +32,16 @@ python3 -m http.server 8080
 
 ## ✏️ Cá Nhân Hoá
 
-Chỉ cần sửa `config.json`. Không cần động vào code.
+Bạn có 2 cách chỉnh:
 
-**Thông tin cô dâu chú rể, ngày cưới, địa điểm, câu chuyện, ảnh, nhạc** → tất cả trong config.json.
+1. **Nhanh nhất:** sửa `settings.json` (đề xuất)
+   - `couple.brideName`, `couple.groomName`
+   - `guest.defaultName`
+   - `hero.dateDisplay`, `hero.backgroundImage`
+   - `gallery`
+2. **Nâng cao:** sửa đầy đủ trong `config.json`.
+
+> Website sẽ ưu tiên lấy dữ liệu trong `settings.json` (nếu có), giúp bạn chỉ cần chỉnh một chỗ cho các thông tin hay thay đổi.
 
 ## 👤 Link Mời Cá Nhân
 

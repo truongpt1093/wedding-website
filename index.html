@@ -266,7 +266,7 @@
 
 <!-- HERO -->
 <section id="hero">
-  <div class="hero-bg"></div>
+  <div class="hero-bg" id="hero-bg"></div>
   <div class="hero-pattern"></div>
   <div class="hero-content">
     <p class="hero-subtitle" id="hero-subtitle">Trân trọng kính mời</p>
@@ -458,12 +458,34 @@
     return;
   }
 
-  // 2. LOADING SCREEN
+  // 2. LOAD QUICK SETTINGS (optional)
+  let settings = {};
+  try {
+    const settingRes = await fetch('settings.json?v=' + Date.now());
+    if (settingRes.ok) {
+      settings = await settingRes.json();
+    }
+  } catch (e) {
+    console.warn('Không thể tải settings.json, dùng config.json mặc định.');
+  }
+
+  const quickCouple = settings.couple || {};
+  const quickGuest = settings.guest || {};
+  const quickHero = settings.hero || {};
+
+  if (quickCouple.brideName) config.couple.bride.name = quickCouple.brideName;
+  if (quickCouple.groomName) config.couple.groom.name = quickCouple.groomName;
+  if (quickGuest.defaultName) config.wedding.defaultGuest = quickGuest.defaultName;
+  if (quickHero.dateDisplay) config.wedding.dateDisplay = quickHero.dateDisplay;
+  if (quickHero.backgroundImage) config.seo.ogImage = quickHero.backgroundImage;
+  if (Array.isArray(settings.gallery) && settings.gallery.length > 0) config.gallery = settings.gallery;
+
+  // 3. LOADING SCREEN
   setTimeout(() => {
     document.getElementById('loading-screen').classList.add('hidden');
   }, 1400);
 
-  // 3. SEO META
+  // 4. SEO META
   const seo = config.seo;
   document.title = seo.title;
   document.querySelector('meta[name="description"]').content = seo.description;
@@ -485,10 +507,15 @@
   document.getElementById('footer-names').textContent = bride.name + ' & ' + groom.name;
   document.getElementById('footer-message').textContent = config.footer.message;
 
-  if (guestName) {
+  if (quickHero.backgroundImage) {
+    document.getElementById('hero-bg').style.background = `linear-gradient(rgba(26,18,8,0.68), rgba(26,18,8,0.74)), url('${quickHero.backgroundImage}') center/cover no-repeat`;
+  }
+
+  const guestDisplayName = guestName || config.wedding.defaultGuest;
+  if (guestDisplayName) {
     document.getElementById('hero-subtitle').style.display = 'none';
     document.getElementById('guest-badge').style.display = 'block';
-    document.getElementById('guest-name-display').textContent = guestName;
+    document.getElementById('guest-name-display').textContent = guestDisplayName;
   }
 
   // 6. COUNTDOWN
