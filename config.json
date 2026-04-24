@@ -1,0 +1,135 @@
+{
+  "couple": {
+    "bride": {
+      "name": "Ngọc Anh",
+      "fullName": "Trần Thị Ngọc Anh",
+      "nickname": "Anh"
+    },
+    "groom": {
+      "name": "Minh Khoa",
+      "fullName": "Nguyễn Minh Khoa",
+      "nickname": "Khoa"
+    }
+  },
+  "wedding": {
+    "date": "2025-12-20",
+    "dateDisplay": "20 tháng 12, 2025",
+    "hashtag": "#AnhKhoa2025",
+    "defaultGuest": "Quý Khách"
+  },
+  "events": [
+    {
+      "name": "Lễ Vu Quy",
+      "emoji": "🌸",
+      "date": "Thứ Bảy, 20/12/2025",
+      "time": "10:00 - 12:00",
+      "location": "Nhà Cô Dâu",
+      "address": "123 Đường Hoa Hồng, Q.3, TP.HCM",
+      "description": "Lễ vu quy của cô dâu tại nhà riêng, gia đình và bạn bè thân thiết cùng chứng kiến giây phút thiêng liêng."
+    },
+    {
+      "name": "Lễ Rước Dâu",
+      "emoji": "💍",
+      "date": "Thứ Bảy, 20/12/2025",
+      "time": "14:00 - 16:00",
+      "location": "Nhà Chú Rể",
+      "address": "456 Đường Bạch Đằng, Q.Bình Thạnh, TP.HCM",
+      "description": "Lễ rước dâu về nhà chồng, hai gia đình chính thức gặp gỡ và trao nhau lời chúc phúc."
+    },
+    {
+      "name": "Tiệc Cưới",
+      "emoji": "🥂",
+      "date": "Thứ Bảy, 20/12/2025",
+      "time": "18:00 - 22:00",
+      "location": "Trung Tâm Tiệc Cưới Grand Palace",
+      "address": "789 Đường Đinh Tiên Hoàng, Q.1, TP.HCM",
+      "description": "Đêm tiệc cưới lung linh với sự góp mặt của gia đình, bạn bè và đồng nghiệp thân yêu."
+    }
+  ],
+  "venue": {
+    "name": "Grand Palace Wedding Center",
+    "address": "789 Đường Đinh Tiên Hoàng, Quận 1, TP. Hồ Chí Minh",
+    "googleMapsUrl": "https://maps.google.com/?q=10.7769,106.7009",
+    "lat": 10.7769,
+    "lng": 106.7009,
+    "contact": {
+      "name": "Ban Tổ Chức",
+      "phone": "+84 909 123 456",
+      "phone2": "+84 908 654 321"
+    }
+  },
+  "story": [
+    {
+      "year": "2019",
+      "title": "Lần Đầu Gặp Gỡ",
+      "content": "Khoa và Anh lần đầu gặp nhau tại một buổi tiệc tất niên của công ty. Khoa bị ấn tượng ngay bởi nụ cười rạng rỡ của Anh, còn Anh lại thích sự hài hước duyên dáng của Khoa. Cả hai đã trò chuyện cả đêm mà không biết thời gian trôi qua."
+    },
+    {
+      "year": "2020",
+      "title": "Chính Thức Hẹn Hò",
+      "content": "Sau nhiều tháng làm bạn, Khoa đã dũng cảm thú nhận tình cảm của mình trong một buổi chiều tà tại công viên Tao Đàn. Anh đã gật đầu đồng ý và từ đó, hai người chính thức bước vào hành trình yêu đương đẹp đẽ."
+    },
+    {
+      "year": "2022",
+      "title": "Vượt Qua Thử Thách",
+      "content": "Đại dịch Covid-19 đã thử thách tình cảm của đôi uyên ương, nhưng cũng chính thời gian đó giúp họ hiểu nhau sâu sắc hơn. Những cuộc gọi video dài bất tận, những tin nhắn quan tâm mỗi sáng - tình yêu của họ ngày càng vững chắc."
+    },
+    {
+      "year": "2024",
+      "title": "Cầu Hôn",
+      "content": "Trong chuyến du lịch Đà Lạt lãng mạn, Khoa đã quỳ xuống cầu hôn Anh ngay giữa vườn hoa rực rỡ. Anh đã bật khóc và gật đầu ngay lập tức - khoảnh khắc đó sẽ mãi mãi là ký ức đẹp nhất trong cuộc đời họ."
+    }
+  ],
+  "gallery": [
+    {
+      "src": "img/eng_pics/_RFX2942-sm.jpg",
+      "fullSrc": "img/eng_pics/_RFX2942-lg.jpg",
+      "alt": "Ảnh đôi 1"
+    },
+    {
+      "src": "img/eng_pics/IMG_3483-sm.jpg",
+      "fullSrc": "img/eng_pics/IMG_3483-lg.jpg",
+      "alt": "Ảnh đôi 2"
+    },
+    {
+      "src": "img/eng_pics/_RFX2992-sm.jpg",
+      "fullSrc": "img/eng_pics/_RFX2992-lg.jpg",
+      "alt": "Ảnh đôi 3"
+    },
+    {
+      "src": "img/eng_pics/_RFX3064-sm.jpg",
+      "fullSrc": "img/eng_pics/_RFX3064-lg.jpg",
+      "alt": "Ảnh đôi 4"
+    },
+    {
+      "src": "img/eng_pics/NGP_4089-sm.jpg",
+      "fullSrc": "img/eng_pics/NGP_4089-lg.jpg",
+      "alt": "Ảnh đôi 5"
+    },
+    {
+      "src": "img/eng_pics/NGP_4119-sm.jpg",
+      "fullSrc": "img/eng_pics/NGP_4119-lg.jpg",
+      "alt": "Ảnh đôi 6"
+    }
+  ],
+  "music": {
+    "enabled": true,
+    "autoplay": true,
+    "src": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+    "title": "Hôm Nay Tôi Lấy Vợ - Tuấn Hưng"
+  },
+  "seo": {
+    "title": "Đám Cưới Ngọc Anh & Minh Khoa - 20/12/2025",
+    "description": "Trân trọng kính mời bạn đến dự lễ thành hôn của Ngọc Anh & Minh Khoa vào ngày 20 tháng 12 năm 2025.",
+    "ogImage": "img/hero-min.jpg",
+    "siteUrl": "https://wedding-ankhoa.vercel.app"
+  },
+  "rsvp": {
+    "deadline": "15 tháng 12, 2025",
+    "googleSheetUrl": "YOUR_GOOGLE_APPS_SCRIPT_URL_HERE",
+    "thankYouMessage": "Cảm ơn bạn đã xác nhận tham dự! Chúng tôi rất vui khi có bạn trong ngày đặc biệt này. 🎉"
+  },
+  "footer": {
+    "message": "Được tạo với ❤️ bởi Ngọc Anh & Minh Khoa"
+  }
+}

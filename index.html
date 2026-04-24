@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thiệp Cưới Online</title>
+  <meta name="description" content="Trân trọng kính mời bạn đến dự lễ thành hôn của chúng tôi.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Thiệp Cưới Online">
+  <meta property="og:description" content="Trân trọng kính mời bạn đến dự lễ thành hôn của chúng tôi.">
+  <meta property="og:image" content="img/hero-min.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Great+Vibes&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+  <style>
+    :root {
+      --gold: #c9a96e;
+      --gold-light: #e8d5b0;
+      --gold-dark: #a07840;
+      --cream: #fdf8f2;
+      --dark: #1a1208;
+      --text: #3d2e1a;
+      --text-light: #7a6650;
+      --rose: #d4a5a5;
+      --sage: #8faa8b;
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-script: 'Great Vibes', cursive;
+      --font-sans: 'Lato', sans-serif;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-sans); background: var(--cream); color: var(--text); overflow-x: hidden; }
+
+    /* LOADING */
+    #loading-screen {
+      position: fixed; inset: 0; background: var(--dark); z-index: 9999;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      transition: opacity 0.8s ease, visibility 0.8s ease;
+    }
+    #loading-screen.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+    .loading-rings { position: relative; width: 80px; height: 80px; margin-bottom: 24px; }
+    .loading-ring {
+      position: absolute; inset: 0; border-radius: 50%;
+      border: 2px solid transparent; border-top-color: var(--gold);
+      animation: spin 1.2s linear infinite;
+    }
+    .loading-ring:nth-child(2) { inset: 8px; border-top-color: var(--gold-light); animation-duration: 1.8s; animation-direction: reverse; }
+    .loading-ring:nth-child(3) { inset: 18px; border-top-color: var(--rose); animation-duration: 1.4s; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .loading-text { font-family: var(--font-script); font-size: 2rem; color: var(--gold); animation: pulse-text 1.5s ease-in-out infinite; }
+    @keyframes pulse-text { 0%,100% { opacity: 0.6; } 50% { opacity: 1; } }
+
+    /* MUSIC */
+    #music-btn {
+      position: fixed; bottom: 24px; right: 24px; z-index: 1000;
+      width: 52px; height: 52px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+      border: none; cursor: pointer; display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 20px rgba(201,169,110,0.5); transition: transform 0.3s, box-shadow 0.3s;
+      color: white; font-size: 1.1rem;
+    }
+    #music-btn:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(201,169,110,0.7); }
+    #music-btn.playing { animation: music-pulse 2s ease-in-out infinite; }
+    @keyframes music-pulse { 0%,100% { box-shadow: 0 4px 20px rgba(201,169,110,0.5); } 50% { box-shadow: 0 4px 30px rgba(201,169,110,0.9), 0 0 0 8px rgba(201,169,110,0.15); } }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 900;
+      padding: 16px 32px; display: flex; align-items: center; justify-content: space-between;
+      transition: background 0.4s, padding 0.4s;
+    }
+    nav.scrolled { background: rgba(26,18,8,0.96); backdrop-filter: blur(10px); padding: 10px 32px; }
+    .nav-logo { font-family: var(--font-script); font-size: 1.8rem; color: var(--gold-light); text-decoration: none; }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,0.85); text-decoration: none; font-size: 0.78rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; transition: color 0.3s; }
+    .nav-links a:hover { color: var(--gold-light); }
+    .nav-rsvp { padding: 8px 20px !important; background: linear-gradient(135deg, var(--gold-dark), var(--gold)); color: white !important; border-radius: 2px; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: white; transition: 0.3s; }
+    .mobile-menu {
+      display: none; position: fixed; inset: 0; background: rgba(26,18,8,0.97); z-index: 895;
+      flex-direction: column; align-items: center; justify-content: center; gap: 36px;
+    }
+    .mobile-menu.active { display: flex; }
+    .mobile-menu a { color: var(--gold-light); text-decoration: none; font-family: var(--font-serif); font-size: 2rem; font-weight: 300; letter-spacing: 4px; }
+
+    /* HERO */
+    #hero { height: 100vh; min-height: 600px; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    .hero-bg { position: absolute; inset: 0; background: linear-gradient(160deg, #1a1208 0%, #2d1f0e 30%, #3d2810 55%, #1a1208 100%); }
+    .hero-bg::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.6) 100%); }
+    .hero-pattern { position: absolute; inset: 0; background-image: radial-gradient(circle at 20% 30%, rgba(201,169,110,0.08) 0%, transparent 50%), radial-gradient(circle at 80% 70%, rgba(212,165,165,0.08) 0%, transparent 50%); }
+    .hero-content { position: relative; z-index: 2; text-align: center; padding: 0 24px; }
+    .hero-subtitle { font-size: 0.75rem; letter-spacing: 5px; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; font-weight: 400; }
+    .hero-names { font-family: var(--font-script); font-size: clamp(3.5rem, 10vw, 7rem); color: white; line-height: 1.1; margin-bottom: 8px; text-shadow: 0 2px 40px rgba(201,169,110,0.3); }
+    .hero-ampersand { color: var(--gold); display: block; font-size: 0.7em; margin: -10px 0; }
+    .hero-date { font-family: var(--font-serif); font-size: clamp(1rem, 2.5vw, 1.4rem); color: var(--gold-light); letter-spacing: 4px; font-weight: 300; margin-top: 20px; margin-bottom: 36px; }
+    .hero-invite { font-family: var(--font-serif); font-size: clamp(0.9rem, 2vw, 1.1rem); color: rgba(255,255,255,0.75); font-style: italic; margin-bottom: 12px; }
+    .hero-guest { display: inline-block; font-family: var(--font-script); font-size: clamp(1.6rem, 4vw, 2.4rem); color: var(--gold); padding: 8px 32px; border: 1px solid rgba(201,169,110,0.4); border-radius: 2px; margin-bottom: 40px; background: rgba(201,169,110,0.08); }
+    .ornament { color: var(--gold); font-size: 1.2rem; letter-spacing: 12px; margin-bottom: 20px; display: block; }
+    .hero-btn { display: inline-block; padding: 14px 40px; background: linear-gradient(135deg, var(--gold-dark), var(--gold)); color: white; text-decoration: none; font-size: 0.8rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; border-radius: 2px; transition: transform 0.3s, box-shadow 0.3s; box-shadow: 0 4px 20px rgba(201,169,110,0.4); }
+    .hero-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,169,110,0.6); }
+    .hero-scroll { position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%); color: var(--gold); font-size: 1.4rem; animation: bounce 2s ease-in-out infinite; text-decoration: none; }
+    @keyframes bounce { 0%,100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(8px); } }
+
+    /* COMMON */
+    section { padding: 90px 0; }
+    .section-label { font-size: 0.7rem; letter-spacing: 5px; text-transform: uppercase; color: var(--gold); font-weight: 700; margin-bottom: 12px; }
+    .section-title { font-family: var(--font-serif); font-size: clamp(2rem, 5vw, 3rem); color: var(--dark); font-weight: 300; margin-bottom: 16px; line-height: 1.2; }
+    .section-divider { display: flex; align-items: center; gap: 16px; margin-bottom: 48px; }
+    .section-divider span { font-size: 1.2rem; color: var(--gold); }
+    .section-divider::before, .section-divider::after { content: ''; flex: 1; height: 1px; background: linear-gradient(to right, transparent, var(--gold-light)); }
+    .section-divider::after { background: linear-gradient(to left, transparent, var(--gold-light)); }
+    .text-center { text-align: center; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+    /* COUNTDOWN */
+    #countdown { background: linear-gradient(135deg, var(--dark) 0%, #2d1f0e 100%); color: white; padding: 70px 0; }
+    .countdown-grid { display: flex; gap: 0; justify-content: center; align-items: center; flex-wrap: wrap; }
+    .countdown-item { text-align: center; padding: 20px 36px; position: relative; }
+    .countdown-item:not(:last-child)::after { content: ':'; position: absolute; right: -8px; top: 20px; font-family: var(--font-serif); font-size: 2.5rem; color: var(--gold); font-weight: 300; }
+    .countdown-number { display: block; font-family: var(--font-serif); font-size: clamp(3rem, 8vw, 5.5rem); font-weight: 300; color: var(--gold-light); line-height: 1; margin-bottom: 8px; }
+    .countdown-label { font-size: 0.65rem; letter-spacing: 4px; text-transform: uppercase; color: rgba(255,255,255,0.5); }
+
+    /* STORY */
+    #story { background: var(--cream); }
+    .story-grid { display: grid; grid-template-columns: 1fr 60px 1fr; gap: 0; }
+    .story-timeline { display: flex; flex-direction: column; align-items: center; }
+    .story-line { width: 1px; flex: 1; background: var(--gold-light); }
+    .story-dot { width: 14px; height: 14px; border-radius: 50%; background: var(--gold); border: 3px solid var(--cream); box-shadow: 0 0 0 1px var(--gold); flex-shrink: 0; margin: 20px 0; }
+    .story-item-left { text-align: right; padding: 20px 32px 20px 0; }
+    .story-item-right { padding: 20px 0 20px 32px; }
+    .story-year { font-family: var(--font-serif); font-size: 2.2rem; color: var(--gold); font-weight: 300; display: block; margin-bottom: 8px; }
+    .story-heading { font-family: var(--font-serif); font-size: 1.3rem; color: var(--dark); margin-bottom: 10px; }
+    .story-text { font-size: 0.92rem; line-height: 1.8; color: var(--text-light); }
+
+    /* EVENTS */
+    #events { background: #f7f1e8; }
+    .events-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+    .event-card { background: white; border-radius: 4px; padding: 36px 28px; text-align: center; box-shadow: 0 2px 30px rgba(26,18,8,0.06); border-top: 3px solid var(--gold); transition: transform 0.3s, box-shadow 0.3s; }
+    .event-card:hover { transform: translateY(-6px); box-shadow: 0 12px 40px rgba(26,18,8,0.12); }
+    .event-emoji { font-size: 2.5rem; margin-bottom: 16px; display: block; }
+    .event-name { font-family: var(--font-serif); font-size: 1.5rem; color: var(--dark); font-weight: 400; margin-bottom: 8px; }
+    .event-date { font-size: 0.8rem; font-weight: 700; letter-spacing: 2px; color: var(--gold); margin-bottom: 4px; text-transform: uppercase; }
+    .event-time { font-size: 0.9rem; color: var(--text-light); margin-bottom: 16px; }
+    .event-divider { width: 40px; height: 1px; background: var(--gold-light); margin: 16px auto; }
+    .event-location { font-size: 0.85rem; font-weight: 700; color: var(--dark); margin-bottom: 4px; }
+    .event-address { font-size: 0.82rem; color: var(--text-light); line-height: 1.5; margin-bottom: 12px; }
+    .event-desc { font-size: 0.85rem; color: var(--text-light); line-height: 1.7; font-style: italic; }
+
+    /* VENUE */
+    #venue { background: var(--cream); }
+    .venue-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+    #map-iframe { width: 100%; height: 380px; border: none; border-radius: 4px; box-shadow: 0 4px 30px rgba(26,18,8,0.12); }
+    .venue-info h3 { font-family: var(--font-serif); font-size: 1.8rem; color: var(--dark); font-weight: 400; margin-bottom: 8px; }
+    .venue-address { color: var(--text-light); font-size: 0.9rem; line-height: 1.7; margin-bottom: 28px; }
+    .venue-contact { margin-bottom: 28px; }
+    .venue-contact p { font-size: 0.9rem; color: var(--text-light); margin-bottom: 6px; }
+    .venue-contact strong { color: var(--dark); }
+    .btn-gold { display: inline-block; padding: 12px 28px; background: linear-gradient(135deg, var(--gold-dark), var(--gold)); color: white; text-decoration: none; font-size: 0.8rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; border-radius: 2px; transition: transform 0.3s, box-shadow 0.3s; box-shadow: 0 4px 16px rgba(201,169,110,0.35); }
+    .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(201,169,110,0.55); }
+
+    /* GALLERY */
+    #gallery { background: var(--dark); color: white; }
+    #gallery .section-title { color: white; }
+    .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; margin-top: 40px; }
+    .gallery-item { position: relative; overflow: hidden; aspect-ratio: 1; }
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; display: block; }
+    .gallery-item:hover img { transform: scale(1.08); }
+    .gallery-overlay { position: absolute; inset: 0; background: rgba(26,18,8,0); display: flex; align-items: center; justify-content: center; transition: background 0.4s; }
+    .gallery-overlay i { color: white; font-size: 1.5rem; opacity: 0; transform: scale(0.5); transition: opacity 0.3s, transform 0.3s; }
+    .gallery-item:hover .gallery-overlay { background: rgba(26,18,8,0.4); }
+    .gallery-item:hover .gallery-overlay i { opacity: 1; transform: scale(1); }
+
+    /* RSVP */
+    #rsvp { background: linear-gradient(135deg, #f7f1e8 0%, var(--cream) 100%); }
+    .rsvp-wrapper { max-width: 640px; margin: 0 auto; }
+    .rsvp-form { margin-top: 40px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+    .form-group { position: relative; }
+    .form-group.full { grid-column: 1 / -1; }
+    .form-group label { display: block; font-size: 0.7rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--text-light); margin-bottom: 8px; }
+    .form-group input, .form-group select {
+      width: 100%; padding: 14px 16px; background: white;
+      border: 1px solid rgba(201,169,110,0.3); border-radius: 2px;
+      font-size: 0.95rem; color: var(--dark); font-family: var(--font-sans);
+      transition: border-color 0.3s, box-shadow 0.3s; outline: none; appearance: none; -webkit-appearance: none;
+    }
+    .form-group input:focus, .form-group select:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201,169,110,0.15); }
+    .form-group select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23c9a96e' fill='none' stroke-width='1.5'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; background-color: white; padding-right: 40px; cursor: pointer; }
+    .btn-submit { width: 100%; padding: 16px; background: linear-gradient(135deg, var(--gold-dark), var(--gold)); color: white; border: none; font-size: 0.85rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; border-radius: 2px; cursor: pointer; transition: transform 0.3s, box-shadow 0.3s; box-shadow: 0 4px 20px rgba(201,169,110,0.4); margin-top: 24px; font-family: var(--font-sans); }
+    .btn-submit:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,169,110,0.6); }
+    .btn-submit:disabled { opacity: 0.7; cursor: not-allowed; }
+    .rsvp-message { margin-top: 20px; padding: 16px 20px; border-radius: 2px; font-size: 0.9rem; text-align: center; display: none; }
+    .rsvp-message.success { background: rgba(143,170,139,0.15); border: 1px solid var(--sage); color: #4a7a46; display: block; }
+    .rsvp-message.error { background: rgba(212,165,165,0.15); border: 1px solid var(--rose); color: #9a4444; display: block; }
+
+    /* FOOTER */
+    footer { background: var(--dark); color: rgba(255,255,255,0.5); text-align: center; padding: 40px 24px; font-size: 0.85rem; }
+    footer .footer-names { font-family: var(--font-script); font-size: 2rem; color: var(--gold); margin-bottom: 8px; }
+    .to-top { display: inline-flex; width: 40px; height: 40px; background: rgba(201,169,110,0.2); border-radius: 50%; align-items: center; justify-content: center; color: var(--gold); margin-bottom: 16px; transition: background 0.3s; text-decoration: none; }
+    .to-top:hover { background: rgba(201,169,110,0.4); }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .story-grid { grid-template-columns: 1fr; }
+      .story-item-left { text-align: left; padding: 12px 0 12px 20px; border-left: 2px solid var(--gold-light); }
+      .story-item-right { padding: 12px 0 12px 20px; border-left: 2px solid var(--gold-light); }
+      .story-timeline { display: none; }
+      .venue-wrapper { grid-template-columns: 1fr; }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+      .form-row { grid-template-columns: 1fr; }
+      .countdown-item { padding: 16px 20px; }
+      .countdown-item:not(:last-child)::after { display: none; }
+      nav { padding: 14px 20px; }
+      section { padding: 60px 0; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Loading Screen -->
+<div id="loading-screen">
+  <div class="loading-rings">
+    <div class="loading-ring"></div>
+    <div class="loading-ring"></div>
+    <div class="loading-ring"></div>
+  </div>
+  <div class="loading-text">Đang mở thiệp cưới...</div>
+</div>
+
+<!-- Music Player -->
+<button id="music-btn" title="Nhạc nền" aria-label="Bật/tắt nhạc">
+  <i class="fa fa-music"></i>
+</button>
+<audio id="bg-music" loop></audio>
+
+<!-- Navigation -->
+<nav id="main-nav">
+  <a href="#hero" class="nav-logo" id="nav-logo">A & K</a>
+  <ul class="nav-links">
+    <li><a href="#story">Chuyện Tình</a></li>
+    <li><a href="#events">Sự Kiện</a></li>
+    <li><a href="#venue">Địa Điểm</a></li>
+    <li><a href="#gallery">Kỷ Niệm</a></li>
+    <li><a href="#rsvp" class="nav-rsvp">RSVP</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#story" class="mobile-link">Chuyện Tình</a>
+  <a href="#events" class="mobile-link">Sự Kiện</a>
+  <a href="#venue" class="mobile-link">Địa Điểm</a>
+  <a href="#gallery" class="mobile-link">Kỷ Niệm</a>
+  <a href="#rsvp" class="mobile-link">RSVP</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-pattern"></div>
+  <div class="hero-content">
+    <p class="hero-subtitle" id="hero-subtitle">Trân trọng kính mời</p>
+    <div id="guest-badge" style="display:none">
+      <p class="hero-invite">Kính gửi</p>
+      <span class="hero-guest" id="guest-name-display"></span>
+    </div>
+    <span class="ornament">— ✦ —</span>
+    <div class="hero-names">
+      <span id="bride-name">Ngọc Anh</span>
+      <span class="hero-ampersand">&</span>
+      <span id="groom-name">Minh Khoa</span>
+    </div>
+    <p class="hero-date" id="hero-date">20 tháng 12, 2025</p>
+    <a href="#rsvp" class="hero-btn">Xác Nhận Tham Dự</a>
+  </div>
+  <a href="#countdown" class="hero-scroll"><i class="fa fa-angle-down"></i></a>
+</section>
+
+<!-- COUNTDOWN -->
+<section id="countdown">
+  <div class="container text-center">
+    <p class="section-label" style="color:rgba(201,169,110,0.7)">Còn lại</p>
+    <h2 class="section-title" style="color:white;margin-bottom:40px">Đếm Ngược Đến Ngày Trọng Đại</h2>
+    <div class="countdown-grid">
+      <div class="countdown-item">
+        <span class="countdown-number" id="cd-days">00</span>
+        <span class="countdown-label">Ngày</span>
+      </div>
+      <div class="countdown-item">
+        <span class="countdown-number" id="cd-hours">00</span>
+        <span class="countdown-label">Giờ</span>
+      </div>
+      <div class="countdown-item">
+        <span class="countdown-number" id="cd-mins">00</span>
+        <span class="countdown-label">Phút</span>
+      </div>
+      <div class="countdown-item">
+        <span class="countdown-number" id="cd-secs">00</span>
+        <span class="countdown-label">Giây</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STORY -->
+<section id="story">
+  <div class="container">
+    <div class="text-center" data-aos="fade-up">
+      <p class="section-label">Hành Trình Của Chúng Tôi</p>
+      <h2 class="section-title">Chuyện Tình Yêu</h2>
+      <div class="section-divider"><span>✦</span></div>
+    </div>
+    <div class="story-grid" id="story-grid"></div>
+  </div>
+</section>
+
+<!-- EVENTS -->
+<section id="events">
+  <div class="container">
+    <div class="text-center" data-aos="fade-up">
+      <p class="section-label">Lịch Trình</p>
+      <h2 class="section-title">Các Sự Kiện</h2>
+      <div class="section-divider"><span>✦</span></div>
+    </div>
+    <div class="events-grid" id="events-grid"></div>
+  </div>
+</section>
+
+<!-- VENUE -->
+<section id="venue">
+  <div class="container">
+    <div class="text-center" data-aos="fade-up">
+      <p class="section-label">Địa Điểm Tổ Chức</p>
+      <h2 class="section-title">Đường Đến Với Chúng Tôi</h2>
+      <div class="section-divider"><span>✦</span></div>
+    </div>
+    <div class="venue-wrapper">
+      <div data-aos="fade-right">
+        <iframe id="map-iframe" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="venue-info" data-aos="fade-left">
+        <h3 id="venue-name"></h3>
+        <p class="venue-address" id="venue-address"></p>
+        <div class="venue-contact">
+          <p><strong id="venue-contact-name"></strong></p>
+          <p><i class="fa fa-phone" style="color:var(--gold);margin-right:8px"></i><span id="venue-phone"></span></p>
+          <p><i class="fa fa-phone" style="color:var(--gold);margin-right:8px"></i><span id="venue-phone2"></span></p>
+        </div>
+        <a href="#" id="venue-map-link" class="btn-gold" target="_blank">
+          <i class="fa fa-map-marker-alt"></i> &nbsp;Mở Google Maps
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="container text-center" data-aos="fade-up">
+    <p class="section-label" style="color:rgba(201,169,110,0.7)">Khoảnh Khắc Đẹp</p>
+    <h2 class="section-title">Ảnh Kỷ Niệm</h2>
+    <div class="section-divider"><span>✦</span></div>
+  </div>
+  <div class="gallery-grid" id="gallery-grid"></div>
+</section>
+
+<!-- RSVP -->
+<section id="rsvp">
+  <div class="container">
+    <div class="text-center" data-aos="fade-up">
+      <p class="section-label">Xác Nhận Tham Dự</p>
+      <h2 class="section-title">RSVP</h2>
+      <div class="section-divider"><span>✦</span></div>
+      <p style="color:var(--text-light);font-size:0.95rem;max-width:480px;margin:0 auto 8px">
+        Chúng tôi rất mong được đón tiếp bạn trong ngày đặc biệt này.
+      </p>
+      <p style="color:var(--gold);font-size:0.85rem;font-style:italic" id="rsvp-deadline"></p>
+    </div>
+    <div class="rsvp-wrapper">
+      <div class="rsvp-form" data-aos="fade-up" data-aos-delay="100">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="rsvp-name">Họ và Tên *</label>
+            <input type="text" id="rsvp-name" placeholder="Nguyễn Văn A" required>
+          </div>
+          <div class="form-group">
+            <label for="rsvp-phone">Số Điện Thoại *</label>
+            <input type="tel" id="rsvp-phone" placeholder="0901 234 567" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="rsvp-attend">Xác Nhận Tham Dự *</label>
+            <select id="rsvp-attend" required>
+              <option value="">-- Chọn --</option>
+              <option value="yes">✅ Tôi sẽ tham dự</option>
+              <option value="no">❌ Rất tiếc, tôi không thể</option>
+              <option value="maybe">🤔 Có thể tham dự</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="rsvp-guests">Số Người Đi Cùng</label>
+            <select id="rsvp-guests">
+              <option value="0">Chỉ mình tôi</option>
+              <option value="1">+ 1 người</option>
+              <option value="2">+ 2 người</option>
+              <option value="3">+ 3 người</option>
+              <option value="4">+ 4 người</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group full">
+            <label for="rsvp-note">Lời Nhắn (tuỳ chọn)</label>
+            <input type="text" id="rsvp-note" placeholder="Gửi lời chúc đến đôi uyên ương...">
+          </div>
+        </div>
+        <button class="btn-submit" id="rsvp-submit">
+          <i class="fa fa-heart"></i> &nbsp; Xác Nhận Tham Dự
+        </button>
+        <div class="rsvp-message" id="rsvp-message"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a href="#hero" class="to-top"><i class="fa fa-angle-up"></i></a>
+  <p class="footer-names" id="footer-names"></p>
+  <p id="footer-message"></p>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+<script>
+(async function() {
+  // 1. LOAD CONFIG
+  let config;
+  try {
+    const res = await fetch('config.json?v=' + Date.now());
+    config = await res.json();
+  } catch(e) {
+    console.error('Không thể tải config.json:', e);
+    document.getElementById('loading-screen').classList.add('hidden');
+    return;
+  }
+
+  // 2. LOADING SCREEN
+  setTimeout(() => {
+    document.getElementById('loading-screen').classList.add('hidden');
+  }, 1400);
+
+  // 3. SEO META
+  const seo = config.seo;
+  document.title = seo.title;
+  document.querySelector('meta[name="description"]').content = seo.description;
+  document.querySelector('meta[property="og:title"]').content = seo.title;
+  document.querySelector('meta[property="og:description"]').content = seo.description;
+  document.querySelector('meta[property="og:image"]').content = seo.ogImage;
+
+  // 4. GUEST PARAM
+  const urlParams = new URLSearchParams(window.location.search);
+  const guestParam = urlParams.get('guest');
+  const guestName = guestParam ? decodeURIComponent(guestParam) : null;
+
+  // 5. HERO
+  const {bride, groom} = config.couple;
+  document.getElementById('bride-name').textContent = bride.name;
+  document.getElementById('groom-name').textContent = groom.name;
+  document.getElementById('hero-date').textContent = config.wedding.dateDisplay;
+  document.getElementById('nav-logo').textContent = bride.name[0] + ' & ' + groom.name[0];
+  document.getElementById('footer-names').textContent = bride.name + ' & ' + groom.name;
+  document.getElementById('footer-message').textContent = config.footer.message;
+
+  if (guestName) {
+    document.getElementById('hero-subtitle').style.display = 'none';
+    document.getElementById('guest-badge').style.display = 'block';
+    document.getElementById('guest-name-display').textContent = guestName;
+  }
+
+  // 6. COUNTDOWN
+  const weddingDate = new Date(config.wedding.date + 'T18:00:00');
+  function updateCountdown() {
+    const diff = weddingDate - new Date();
+    if (diff <= 0) {
+      ['cd-days','cd-hours','cd-mins','cd-secs'].forEach(id => document.getElementById(id).textContent = '00');
+      return;
+    }
+    document.getElementById('cd-days').textContent = String(Math.floor(diff / 86400000)).padStart(2,'0');
+    document.getElementById('cd-hours').textContent = String(Math.floor((diff % 86400000) / 3600000)).padStart(2,'0');
+    document.getElementById('cd-mins').textContent = String(Math.floor((diff % 3600000) / 60000)).padStart(2,'0');
+    document.getElementById('cd-secs').textContent = String(Math.floor((diff % 60000) / 1000)).padStart(2,'0');
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  // 7. STORY
+  const sg = document.getElementById('story-grid');
+  config.story.forEach((item, i) => {
+    const delay = i * 100;
+    if (i % 2 === 0) {
+      sg.innerHTML += `
+        <div class="story-item-left" data-aos="fade-right" data-aos-delay="${delay}">
+          <span class="story-year">${item.year}</span>
+          <h4 class="story-heading">${item.title}</h4>
+          <p class="story-text">${item.content}</p>
+        </div>
+        <div class="story-timeline"><div class="story-line"></div><div class="story-dot"></div><div class="story-line"></div></div>
+        <div></div>`;
+    } else {
+      sg.innerHTML += `
+        <div></div>
+        <div class="story-timeline"><div class="story-line"></div><div class="story-dot"></div><div class="story-line"></div></div>
+        <div class="story-item-right" data-aos="fade-left" data-aos-delay="${delay}">
+          <span class="story-year">${item.year}</span>
+          <h4 class="story-heading">${item.title}</h4>
+          <p class="story-text">${item.content}</p>
+        </div>`;
+    }
+  });
+
+  // 8. EVENTS
+  const eg = document.getElementById('events-grid');
+  config.events.forEach((ev, i) => {
+    eg.innerHTML += `
+      <div class="event-card" data-aos="fade-up" data-aos-delay="${i*100}">
+        <span class="event-emoji">${ev.emoji}</span>
+        <h3 class="event-name">${ev.name}</h3>
+        <p class="event-date">${ev.date}</p>
+        <p class="event-time"><i class="fa fa-clock" style="color:var(--gold);margin-right:6px"></i>${ev.time}</p>
+        <div class="event-divider"></div>
+        <p class="event-location">${ev.location}</p>
+        <p class="event-address">${ev.address}</p>
+        <p class="event-desc">${ev.description}</p>
+      </div>`;
+  });
+
+  // 9. VENUE
+  const venue = config.venue;
+  document.getElementById('venue-name').textContent = venue.name;
+  document.getElementById('venue-address').textContent = venue.address;
+  document.getElementById('venue-contact-name').textContent = venue.contact.name;
+  document.getElementById('venue-phone').textContent = venue.contact.phone;
+  document.getElementById('venue-phone2').textContent = venue.contact.phone2;
+  document.getElementById('venue-map-link').href = venue.googleMapsUrl;
+  document.getElementById('map-iframe').src = `https://maps.google.com/maps?q=${venue.lat},${venue.lng}&z=15&output=embed`;
+
+  // 10. GALLERY
+  const gg = document.getElementById('gallery-grid');
+  config.gallery.forEach((img, i) => {
+    gg.innerHTML += `
+      <div class="gallery-item" data-aos="fade-in" data-aos-delay="${i*80}">
+        <a data-fancybox="gallery" href="${img.fullSrc}">
+          <img src="${img.src}" alt="${img.alt}" loading="lazy">
+          <div class="gallery-overlay"><i class="fa fa-search-plus"></i></div>
+        </a>
+      </div>`;
+  });
+
+  // 11. RSVP deadline
+  document.getElementById('rsvp-deadline').textContent = 'Vui lòng xác nhận trước ngày ' + config.rsvp.deadline;
+
+  // 12. RSVP SUBMIT
+  document.getElementById('rsvp-submit').addEventListener('click', async () => {
+    const name = document.getElementById('rsvp-name').value.trim();
+    const phone = document.getElementById('rsvp-phone').value.trim();
+    const attend = document.getElementById('rsvp-attend').value;
+    const guests = document.getElementById('rsvp-guests').value;
+    const note = document.getElementById('rsvp-note').value.trim();
+    const msgEl = document.getElementById('rsvp-message');
+    const btn = document.getElementById('rsvp-submit');
+
+    msgEl.className = 'rsvp-message';
+    msgEl.style.display = 'none';
+
+    if (!name || !phone || !attend) {
+      msgEl.className = 'rsvp-message error';
+      msgEl.textContent = '⚠️ Vui lòng điền đầy đủ thông tin bắt buộc (có dấu *).';
+      return;
+    }
+    if (!/^[0-9+\s\-]{9,15}$/.test(phone)) {
+      msgEl.className = 'rsvp-message error';
+      msgEl.textContent = '⚠️ Số điện thoại không hợp lệ.';
+      return;
+    }
+
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> &nbsp; Đang gửi...';
+
+    const attendText = attend === 'yes' ? 'Có tham dự' : attend === 'no' ? 'Không tham dự' : 'Có thể';
+    const payload = {
+      name, phone,
+      attend: attendText,
+      guests: parseInt(guests) + 1,
+      note,
+      guest_url_param: guestName || '',
+      timestamp: new Date().toLocaleString('vi-VN', {timeZone: 'Asia/Ho_Chi_Minh'})
+    };
+
+    try {
+      const url = config.rsvp.googleSheetUrl;
+      if (url && url !== 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
+        await fetch(url, {method:'POST', mode:'no-cors', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload)});
+      }
+      msgEl.className = 'rsvp-message success';
+      msgEl.textContent = '🎉 ' + config.rsvp.thankYouMessage;
+      ['rsvp-name','rsvp-phone','rsvp-note'].forEach(id => document.getElementById(id).value = '');
+      document.getElementById('rsvp-attend').value = '';
+      document.getElementById('rsvp-guests').value = '0';
+    } catch(e) {
+      msgEl.className = 'rsvp-message error';
+      msgEl.textContent = '❌ Có lỗi xảy ra. Vui lòng thử lại hoặc liên hệ ban tổ chức.';
+    }
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fa fa-heart"></i> &nbsp; Xác Nhận Tham Dự';
+  });
+
+  // 13. MUSIC
+  const music = config.music;
+  const audio = document.getElementById('bg-music');
+  const musicBtn = document.getElementById('music-btn');
+  let isPlaying = false;
+
+  if (music.enabled && music.src) {
+    audio.src = music.src;
+    musicBtn.title = music.title || 'Nhạc nền';
+
+    const toggleMusic = () => {
+      if (isPlaying) {
+        audio.pause();
+        musicBtn.innerHTML = '<i class="fa fa-music"></i>';
+        musicBtn.classList.remove('playing');
+        isPlaying = false;
+      } else {
+        audio.play().then(() => {
+          musicBtn.innerHTML = '<i class="fa fa-pause"></i>';
+          musicBtn.classList.add('playing');
+          isPlaying = true;
+        }).catch(() => {});
+      }
+    };
+
+    musicBtn.addEventListener('click', toggleMusic);
+
+    if (music.autoplay) {
+      document.addEventListener('click', function autoStart() {
+        if (!isPlaying) {
+          audio.play().then(() => {
+            isPlaying = true;
+            musicBtn.innerHTML = '<i class="fa fa-pause"></i>';
+            musicBtn.classList.add('playing');
+          }).catch(() => {});
+        }
+        document.removeEventListener('click', autoStart);
+      }, {once: true});
+    }
+  } else {
+    musicBtn.style.display = 'none';
+  }
+
+  // 14. NAV SCROLL
+  window.addEventListener('scroll', () => {
+    document.getElementById('main-nav').classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // 15. HAMBURGER
+  document.getElementById('hamburger').addEventListener('click', () => {
+    document.getElementById('mobile-menu').classList.toggle('active');
+  });
+  document.querySelectorAll('.mobile-link').forEach(a => {
+    a.addEventListener('click', () => document.getElementById('mobile-menu').classList.remove('active'));
+  });
+
+  // 16. AOS
+  AOS.init({duration: 800, easing: 'ease-out-cubic', once: true, offset: 60});
+
+  // 17. FANCYBOX
+  $('[data-fancybox="gallery"]').fancybox({buttons: ['zoom','close'], loop: true});
+
+})();
+</script>
+</body>
+</html>
