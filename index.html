@@ -4,17 +4,17 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Thiệp Cưới Online</title>
-  <meta name="description" content="Trân trọng kính mời bạn đến dự lễ thành hôn của chúng tôi.">
+  <title>Ngọc Anh & Minh Khoa — Thiệp Cưới Online</title>
+  <meta name="description" content="Trân trọng kính mời bạn đến dự lễ thành hôn của Ngọc Anh & Minh Khoa vào ngày 20/12/2025.">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Thiệp Cưới Online">
-  <meta property="og:description" content="Trân trọng kính mời bạn đến dự lễ thành hôn của chúng tôi.">
-  <meta property="og:image" content="img/hero-min.jpg">
+  <meta property="og:title" content="Đám Cưới Ngọc Anh & Minh Khoa">
+  <meta property="og:description" content="Trân trọng kính mời bạn đến dự lễ thành hôn của chúng tôi vào ngày 20/12/2025.">
+  <meta property="og:image" content="img/hero-min.png">
 
   <!-- FONTS -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   
   <!-- LIBRARIES -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -22,19 +22,20 @@
 
   <style>
     :root {
-      --gold: #c5a367;
-      --gold-light: #f9f6f0;
-      --gold-dark: #846a3d;
-      --cream: #fdfcf9;
-      --dark: #1a1a1a;
-      --text: #2c2c2c;
-      --text-light: #767676;
-      --rose: #e8d0d0;
-      --sage: #b4c2b5;
-      --font-serif: 'Playfair Display', serif;
-      --font-script: 'Great Vibes', cursive;
-      --font-sans: 'Inter', sans-serif;
-      --transition-soft: all 1s cubic-bezier(0.19, 1, 0.22, 1);
+      --gold: #bda073;           /* Muted champagne gold */
+      --gold-light: #f7f3eb;     /* Soft gold-cream */
+      --gold-dark: #7a6344;      /* Editorial deep gold */
+      --cream: #faf8f5;          /* Linen off-white */
+      --dark: #1e1b18;           /* Cozy dark espresso */
+      --text: #2f2a25;           /* Soft charcoal dark text */
+      --text-light: #7a7065;     /* Warm grey text */
+      --rose: #ebdcd5;           /* Soft rose dust */
+      --sage: #a8b5a5;           /* Muted warm sage */
+      
+      --font-serif: 'Cormorant Garamond', serif;
+      --font-sans: 'Plus Jakarta Sans', sans-serif;
+      --transition-soft: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      --transition-fast: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
     
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -53,10 +54,10 @@
       -moz-osx-font-smoothing: grayscale;
     }
     
-    h1, h2, h3, h4 { font-family: var(--font-serif); font-weight: 400; letter-spacing: -0.03em; line-height: 1.1; }
+    h1, h2, h3, h4 { font-family: var(--font-serif); font-weight: 300; letter-spacing: -0.02em; line-height: 1.1; }
     p { line-height: 1.8; font-weight: 400; font-size: 1rem; color: var(--text-light); }
-    .container { max-width: 1300px; margin: 0 auto; padding: 0 60px; }
-    section { padding: 180px 0; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+    section { padding: 120px 0; }
     .text-center { text-align: center; }
 
     /* LOADING SCREEN */
@@ -66,101 +67,627 @@
       transition: opacity 1s var(--transition-soft), visibility 1s var(--transition-soft);
     }
     #loading-screen.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
-    .loading-text { font-family: var(--font-serif); font-size: 1.1rem; color: var(--gold-dark); letter-spacing: 0.3em; text-transform: uppercase; }
+    .loading-logo {
+      font-family: var(--font-serif);
+      font-size: 3.5rem;
+      font-weight: 300;
+      color: var(--gold-dark);
+      margin-bottom: 20px;
+      letter-spacing: 0.1em;
+    }
+    .loading-bar {
+      width: 100px;
+      height: 1px;
+      background: rgba(0, 0, 0, 0.08);
+      position: relative;
+      overflow: hidden;
+    }
+    .loading-bar::after {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 50%;
+      background: var(--gold);
+      animation: load-pulse 1.5s infinite ease-in-out;
+    }
+    @keyframes load-pulse {
+      0% { left: -50%; }
+      100% { left: 100%; }
+    }
 
     /* NAVIGATION */
     nav {
       position: fixed; top: 0; width: 100%; z-index: 900;
-      padding: 48px 60px; display: flex; align-items: center; justify-content: space-between;
-      transition: all 0.8s var(--transition-soft);
+      padding: 32px 40px; display: flex; align-items: center; justify-content: space-between;
+      transition: var(--transition-soft);
     }
-    nav.scrolled { padding: 24px 60px; background: rgba(253, 252, 249, 0.7); backdrop-filter: blur(30px); border-bottom: 1px solid rgba(0, 0, 0, 0.03); }
-    .nav-logo { font-family: var(--font-serif); font-size: 1.4rem; color: var(--dark); text-decoration: none; letter-spacing: 0.15em; font-weight: 400; }
-    .nav-links { display: flex; gap: 48px; list-style: none; align-items: center; }
-    .nav-links a { color: var(--text-light); text-decoration: none; font-size: 0.65rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; transition: var(--transition-soft); }
+    nav.scrolled { 
+      padding: 16px 40px; 
+      background: rgba(250, 248, 245, 0.85); 
+      backdrop-filter: blur(20px); 
+      border-bottom: 1px solid rgba(0, 0, 0, 0.02); 
+    }
+    .nav-logo { 
+      font-family: var(--font-serif); 
+      font-size: 1.6rem; 
+      color: var(--dark); 
+      text-decoration: none; 
+      letter-spacing: 0.1em; 
+      font-weight: 300; 
+    }
+    .nav-links { display: flex; gap: 36px; list-style: none; align-items: center; }
+    .nav-links a { 
+      color: var(--text-light); 
+      text-decoration: none; 
+      font-size: 0.7rem; 
+      font-weight: 600; 
+      letter-spacing: 0.15em; 
+      text-transform: uppercase; 
+      transition: var(--transition-fast); 
+    }
     .nav-links a:hover { color: var(--gold); }
-    .nav-rsvp { padding: 12px 28px !important; border: 1px solid var(--gold); color: var(--gold) !important; border-radius: 100px; }
+    .nav-rsvp { 
+      padding: 10px 24px !important; 
+      border: 1px solid var(--gold); 
+      color: var(--gold) !important; 
+      border-radius: 100px; 
+    }
     .nav-rsvp:hover { background: var(--gold); color: white !important; }
 
     /* HERO SECTION */
-    #hero { height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; background: var(--cream); }
-    .hero-content { position: relative; z-index: 2; text-align: center; max-width: 1000px; }
-    .hero-subtitle { font-size: 0.7rem; letter-spacing: 0.5em; text-transform: uppercase; color: var(--gold-dark); margin-bottom: 50px; font-weight: 600; opacity: 0.8; }
-    .hero-names { font-size: clamp(4.5rem, 16vw, 11rem); line-height: 0.8; margin-bottom: 50px; color: var(--dark); font-weight: 400; }
-    .hero-date { font-family: var(--font-sans); font-size: 0.75rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold-dark); font-weight: 600; }
-    .hero-bg { position: absolute; inset: 0; background-position: center; background-size: cover; opacity: 0.12; filter: grayscale(1); transform: scale(1.1); }
+    #hero { 
+      min-height: 100vh; 
+      min-height: 100dvh; 
+      display: flex; 
+      align-items: center; 
+      position: relative; 
+      overflow: hidden; 
+      background: var(--cream);
+      padding: 100px 0 60px;
+    }
+    .hero-split {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 60px;
+      align-items: center;
+      width: 100%;
+    }
+    .hero-text-side {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .hero-subtitle { 
+      font-size: 0.75rem; 
+      letter-spacing: 0.3em; 
+      text-transform: uppercase; 
+      color: var(--gold-dark); 
+      font-weight: 600; 
+      margin-bottom: 24px;
+    }
+    .hero-names { 
+      font-size: clamp(3rem, 7vw, 5.5rem); 
+      line-height: 1.1; 
+      margin-bottom: 36px; 
+      color: var(--dark); 
+      font-weight: 300; 
+      display: flex;
+      flex-direction: column;
+    }
+    .name-display { display: inline-block; }
+    .connector { 
+      font-family: var(--font-serif); 
+      font-style: italic; 
+      font-size: 0.75em; 
+      color: var(--gold); 
+      margin: 4px 0; 
+      font-weight: 300;
+    }
+    .hero-date-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .date-line {
+      height: 1px;
+      width: 40px;
+      background: var(--gold);
+    }
+    .hero-date { 
+      font-family: var(--font-sans); 
+      font-size: 0.8rem; 
+      letter-spacing: 0.25em; 
+      text-transform: uppercase; 
+      color: var(--gold-dark); 
+      font-weight: 600; 
+    }
+    .hero-image-side {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+    .hero-frame {
+      width: 100%;
+      max-width: 400px;
+      aspect-ratio: 3/4;
+      border-radius: 200px 200px 0 0; /* Arched luxury shape */
+      overflow: hidden;
+      border: 1px solid rgba(0, 0, 0, 0.04);
+      box-shadow: 0 30px 60px rgba(184, 156, 109, 0.08);
+      background: var(--gold-light);
+      position: relative;
+    }
+    .hero-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1.02);
+      transition: transform 2s var(--transition-soft);
+    }
+    .hero-frame:hover img {
+      transform: scale(1.08);
+    }
 
-    /* STORY - ASYMMETRIC EDITORIAL */
-    .story-item { display: grid; grid-template-columns: repeat(12, 1fr); gap: 80px; align-items: center; margin-bottom: 220px; }
-    .story-image { grid-column: 1 / 8; position: relative; overflow: hidden; }
-    .story-image img { width: 100%; aspect-ratio: 16/11; object-fit: cover; transition: transform 2.5s var(--transition-soft); }
-    .story-item:nth-child(even) .story-image { grid-column: 5 / 13; }
-    .story-content { grid-column: 9 / 13; padding-right: 40px; }
-    .story-item:nth-child(even) .story-content { grid-column: 1 / 5; grid-row: 1; padding-right: 0; padding-left: 40px; text-align: right; }
-    .story-year { font-size: 6rem; color: var(--gold-light); line-height: 1; margin-bottom: 30px; font-family: var(--font-serif); font-weight: 400; letter-spacing: -0.05em; }
-    .story-title { font-size: 2.5rem; margin-bottom: 28px; color: var(--dark); line-height: 1.2; }
-    .story-text { color: var(--text-light); font-size: 1.05rem; line-height: 1.9; }
+    /* STORY - EDITORIAL TIMELINE */
+    .story-timeline {
+      position: relative;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 40px 0;
+    }
+    .story-timeline::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: rgba(189, 160, 115, 0.2);
+      transform: translateX(-50%);
+    }
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      margin-bottom: 100px;
+      position: relative;
+    }
+    .timeline-left {
+      text-align: right;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .timeline-right {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .timeline-dot {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--cream);
+      border: 2px solid var(--gold);
+      transform: translate(-50%, -50%);
+      z-index: 2;
+    }
+    .timeline-year {
+      font-family: var(--font-serif);
+      font-size: 4.5rem;
+      line-height: 1;
+      color: var(--gold);
+      opacity: 0.45;
+      font-weight: 300;
+      margin-bottom: 12px;
+    }
+    .timeline-title {
+      font-family: var(--font-serif);
+      font-size: 2rem;
+      color: var(--dark);
+      margin-bottom: 16px;
+      font-weight: 400;
+    }
+    .timeline-content {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: var(--text-light);
+    }
+    .timeline-image-wrapper {
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(0, 0, 0, 0.04);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.03);
+    }
+    .timeline-image-wrapper img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      transition: transform 2s var(--transition-soft);
+    }
+    .timeline-image-wrapper:hover img {
+      transform: scale(1.06);
+    }
 
-    /* EVENT CARDS - SOFT AESTHETIC */
-    .events-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 40px; margin-top: 80px; }
-    .event-card { background: white; padding: 100px 60px; text-align: center; border: 1px solid rgba(0,0,0,0.03); transition: var(--transition-soft); position: relative; overflow: hidden; }
-    .event-card:hover { transform: translateY(-15px); border-color: var(--gold-light); box-shadow: 0 40px 80px rgba(184, 156, 109, 0.08); }
-    .event-card h3 { font-size: 2.8rem; margin-bottom: 30px; color: var(--dark); }
-    .event-info { font-size: 0.8rem; letter-spacing: 0.2em; color: var(--gold-dark); text-transform: uppercase; margin-bottom: 12px; font-weight: 700; }
+    /* EVENTS SCHEDULE */
+    .events-grid { 
+      display: grid; 
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+      gap: 32px; 
+      margin-top: 64px; 
+    }
+    .event-card { 
+      background: white; 
+      padding: 60px 40px; 
+      border-radius: 16px; 
+      border: 1px solid rgba(189, 160, 115, 0.15); 
+      box-shadow: 0 10px 45px rgba(184, 156, 109, 0.03); 
+      text-align: center; 
+      transition: var(--transition-soft); 
+      position: relative; 
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 480px;
+    }
+    .event-card:hover { 
+      transform: translateY(-10px); 
+      border-color: var(--gold); 
+      box-shadow: 0 25px 60px rgba(184, 156, 109, 0.08); 
+    }
+    .event-title { 
+      font-family: var(--font-serif); 
+      font-size: 2.2rem; 
+      color: var(--dark); 
+      margin-bottom: 24px; 
+      font-weight: 300;
+    }
+    .event-details {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .event-detail-item {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.9rem;
+      color: var(--text-light);
+    }
+    .event-detail-item i {
+      font-size: 0.9rem;
+      color: var(--gold);
+    }
+    .event-detail-item strong {
+      color: var(--dark);
+      font-weight: 600;
+    }
 
-    /* GALLERY */
-    .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 100px; }
-    .gallery-item { aspect-ratio: 1; overflow: hidden; position: relative; }
-    .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 2s var(--transition-soft); }
-    .gallery-item:hover img { transform: scale(1.12); }
+    /* GALLERY - ASYMMETRIC BENTO GRID */
+    .gallery-grid { 
+      display: grid; 
+      grid-template-columns: repeat(3, 1fr); 
+      grid-auto-rows: 260px;
+      gap: 20px; 
+      margin-top: 64px; 
+    }
+    .gallery-item { 
+      position: relative; 
+      overflow: hidden; 
+      border-radius: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    .gallery-item.item-0 { grid-column: span 2; grid-row: span 2; }
+    .gallery-item.item-1 { grid-column: span 1; grid-row: span 1; }
+    .gallery-item.item-2 { grid-column: span 1; grid-row: span 1; }
+    .gallery-item.item-3 { grid-column: span 1; grid-row: span 2; }
+    .gallery-item.item-4 { grid-column: span 2; grid-row: span 1; }
+    
+    .gallery-item img { 
+      width: 100%; 
+      height: 100%; 
+      object-fit: cover; 
+      transition: transform 2s var(--transition-soft); 
+    }
+    .gallery-item:hover img { transform: scale(1.08); }
 
     /* BUTTONS */
     .btn-gold {
-      display: inline-block; padding: 24px 64px; background: var(--dark); color: white;
-      text-decoration: none; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.3em;
-      text-transform: uppercase; border-radius: 100px; transition: var(--transition-soft);
+      display: inline-flex; 
+      align-items: center;
+      justify-content: center;
+      padding: 16px 36px; 
+      background: var(--dark); 
+      color: white;
+      text-decoration: none; 
+      font-size: 0.75rem; 
+      font-weight: 600; 
+      letter-spacing: 0.2em;
+      text-transform: uppercase; 
+      border-radius: 100px; 
+      transition: var(--transition-fast);
       border: 1px solid var(--dark);
+      cursor: pointer;
+      outline: none;
     }
-    .btn-gold:hover { background: transparent; color: var(--dark); transform: translateY(-5px); box-shadow: 0 30px 60px rgba(0, 0, 0, 0.1); }
-
-    /* RSVP FORM */
-    .rsvp-wrapper { max-width: 700px; margin: 100px auto 0; padding: 0 20px; }
-    .form-group { margin-bottom: 48px; text-align: left; }
-    .form-group label { display: block; font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--text-light); margin-bottom: 16px; font-weight: 700; opacity: 0.6; }
-    .form-group input, .form-group select {
-      width: 100%; padding: 24px 0; background: transparent; border: none; border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-      font-size: 1.4rem; font-family: var(--font-serif); color: var(--dark); outline: none; transition: var(--transition-soft);
+    .btn-gold:hover { 
+      background: transparent; 
+      color: var(--dark); 
+      transform: translateY(-2px); 
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08); 
     }
-    .form-group input:focus { border-bottom-color: var(--gold); padding-left: 10px; }
-    .form-group input::placeholder { color: #ccc; font-family: var(--font-sans); font-size: 0.9rem; letter-spacing: 0; }
+    .btn-gold i {
+      margin-right: 8px;
+    }
 
-    footer { padding: 120px 0; background: var(--cream); border-top: 1px solid rgba(0, 0, 0, 0.03); text-align: center; }
-    .footer-names { font-family: var(--font-script); font-size: 4rem; color: var(--gold); margin-bottom: 24px; }
+    /* RSVP FORM STYLING */
+    .rsvp-wrapper { 
+      max-width: 600px; 
+      margin: 64px auto 0; 
+      background: white;
+      padding: 56px 48px;
+      border-radius: 20px;
+      border: 1px solid rgba(189, 160, 115, 0.12);
+      box-shadow: 0 20px 50px rgba(184, 156, 109, 0.04);
+      text-align: left;
+    }
+    .form-group { margin-bottom: 32px; }
+    .form-group label { 
+      display: block; 
+      font-size: 0.7rem; 
+      letter-spacing: 0.15em; 
+      text-transform: uppercase; 
+      color: var(--text-light); 
+      margin-bottom: 12px; 
+      font-weight: 600; 
+    }
+    .form-group input {
+      width: 100%; 
+      padding: 16px; 
+      background: var(--cream); 
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      border-radius: 8px;
+      font-size: 1rem; 
+      font-family: var(--font-sans); 
+      color: var(--dark); 
+      outline: none; 
+      transition: var(--transition-fast);
+    }
+    .form-group input:focus { 
+      border-color: var(--gold); 
+      background: white;
+      box-shadow: 0 0 0 3px rgba(189, 160, 115, 0.1);
+    }
+    .form-group input::placeholder { color: #aaa; }
 
-    @media (max-width: 1024px) {
-      .container { padding: 0 40px; }
-      nav { padding: 32px 40px; }
+    /* Custom RSVP Select */
+    .rsvp-choices {
+      display: flex;
+      gap: 16px;
+      margin-top: 8px;
+    }
+    .rsvp-choice-card {
+      flex: 1;
+      background: white;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      padding: 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: var(--transition-fast);
+    }
+    .rsvp-choice-card:hover {
+      border-color: var(--gold);
+      background: var(--gold-light);
+    }
+    .rsvp-choice-card.active {
+      border-color: var(--gold);
+      background: var(--gold-light);
+    }
+    .choice-circle {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 2px solid rgba(0, 0, 0, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition-fast);
+    }
+    .rsvp-choice-card.active .choice-circle {
+      border-color: var(--gold);
+      background: var(--gold);
+    }
+    .rsvp-choice-card.active .choice-circle::after {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: white;
+    }
+    .choice-label {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--dark);
+    }
+
+    /* MUSIC PLAYER Vinyl floating */
+    .music-player {
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      z-index: 1000;
+      cursor: pointer;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(20px);
+      padding: 10px;
+      border-radius: 100px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+      border: 1px solid rgba(0, 0, 0, 0.03);
+      transition: var(--transition-fast);
+    }
+    .music-player:hover {
+      transform: scale(1.05);
+      border-color: var(--gold);
+    }
+    .disc-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .music-disc {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1.5px solid var(--gold);
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: rotate-disc 6s linear infinite;
+      animation-play-state: paused;
+    }
+    .music-player.playing .music-disc {
+      animation-play-state: running;
+    }
+    .sound-waves {
+      display: flex;
+      align-items: flex-end;
+      gap: 2.5px;
+      height: 14px;
+      width: 20px;
+    }
+    .sound-waves span {
+      display: block;
+      width: 2.5px;
+      background: var(--gold);
+      height: 2px;
+      border-radius: 2px;
+      animation: wave-play 1.2s ease infinite;
+      animation-play-state: paused;
+    }
+    .music-player.playing .sound-waves span {
+      animation-play-state: running;
+    }
+    .sound-waves span:nth-child(1) { animation-delay: 0.1s; }
+    .sound-waves span:nth-child(2) { animation-delay: 0.3s; }
+    .sound-waves span:nth-child(3) { animation-delay: 0.6s; }
+    .sound-waves span:nth-child(4) { animation-delay: 0.2s; }
+
+    @keyframes rotate-disc {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    @keyframes wave-play {
+      0%, 100% { height: 2px; }
+      50% { height: 14px; }
+    }
+
+    footer { padding: 100px 0; background: var(--cream); border-top: 1px solid rgba(0, 0, 0, 0.02); text-align: center; }
+    .footer-names { font-family: var(--font-serif); font-size: 3.5rem; color: var(--gold); margin-bottom: 20px; font-weight: 300; }
+
+    /* RESPONSIVENESS */
+    @media (max-width: 991px) {
+      .container { padding: 0 30px; }
+      nav { padding: 24px 30px; }
+      .hero-split {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        text-align: center;
+      }
+      .hero-text-side {
+        align-items: center;
+        order: 2;
+      }
+      .hero-image-side {
+        order: 1;
+      }
+      .hero-frame {
+        max-width: 280px;
+      }
+      .hero-names {
+        font-size: 3.2rem;
+        margin: 16px 0 24px;
+      }
+      .hero-date-wrapper {
+        justify-content: center;
+      }
     }
 
     @media (max-width: 768px) {
-      section { padding: 120px 0; }
-      .story-item { display: block; margin-bottom: 100px; }
-      .story-image { margin-bottom: 40px; }
-      .story-content { padding-right: 0; text-align: left !important; padding-left: 0; }
-      .story-year { font-size: 4rem; }
-      .hero-names { font-size: 4.5rem; }
-      .container { padding: 0 30px; }
-      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
-      nav { padding: 24px 30px; }
+      section { padding: 80px 0; }
+      .story-timeline::before {
+        left: 20px;
+      }
+      .timeline-item {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        margin-bottom: 60px;
+        padding-left: 48px;
+      }
+      .timeline-left {
+        text-align: left;
+      }
+      .timeline-dot {
+        left: 20px;
+        top: 0;
+        transform: translate(-50%, 0);
+      }
+      .timeline-image-wrapper {
+        order: -1;
+      }
+      .timeline-year {
+        font-size: 3.5rem;
+        margin-bottom: 8px;
+      }
+      .timeline-title {
+        font-size: 1.6rem;
+      }
       .nav-links { display: none; }
-      .event-card { padding: 60px 30px; }
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-auto-rows: 160px;
+        gap: 12px;
+      }
+      .rsvp-wrapper {
+        padding: 40px 24px;
+      }
+      .rsvp-choices {
+        flex-direction: column;
+        gap: 12px;
+      }
+      .event-card {
+        padding: 48px 24px;
+        min-height: auto;
+      }
+      .music-player {
+        bottom: 24px;
+        right: 24px;
+      }
+    }
+
+    /* Fancybox overrides for absolute z-index layering & interaction click safety */
+    .fancybox-container {
+      z-index: 999999 !important;
+    }
+    .fancybox-button {
+      pointer-events: auto !important;
     }
   </style>
 </head>
 <body>
 
 <div id="loading-screen">
-  <div class="loading-text">Mở thiệp cưới</div>
+  <div class="loading-logo">A & K</div>
+  <div class="loading-bar"></div>
 </div>
 
 <nav id="main-nav">
@@ -174,33 +701,45 @@
 </nav>
 
 <section id="hero">
-  <div class="hero-bg" id="hero-bg"></div>
-  <div class="hero-content">
-    <p class="hero-subtitle">Trân trọng kính mời</p>
-    <h1 class="hero-names">
-      <span id="bride-name"></span><br>
-      <span style="font-family: var(--font-script); font-size: 0.5em; color: var(--gold);">&</span><br>
-      <span id="groom-name"></span>
-    </h1>
-    <p class="hero-date" id="hero-date"></p>
+  <div class="container">
+    <div class="hero-split">
+      <div class="hero-text-side">
+        <p class="hero-subtitle">Trân trọng kính mời</p>
+        <h1 class="hero-names">
+          <span id="bride-name" class="name-display"></span>
+          <span class="connector">&</span>
+          <span id="groom-name" class="name-display"></span>
+        </h1>
+        <div class="hero-date-wrapper">
+          <span class="date-line"></span>
+          <p class="hero-date" id="hero-date"></p>
+          <span class="date-line"></span>
+        </div>
+      </div>
+      <div class="hero-image-side">
+        <div class="hero-frame" id="hero-frame-parallax">
+          <img src="img/hero-min.png" alt="Ngọc Anh & Minh Khoa" id="hero-img">
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
 <section id="story">
   <div class="container">
-    <div class="text-center" style="margin-bottom: 100px;">
-      <p class="hero-subtitle" style="margin-bottom: 16px;">Hành trình</p>
-      <h2 style="font-size: 3.5rem;">Chuyện Tình Yêu</h2>
+    <div class="text-center" style="margin-bottom: 80px;">
+      <p class="hero-subtitle" style="margin-bottom: 12px;">Hành trình</p>
+      <h2 style="font-size: 3.2rem;">Chuyện Tình Yêu</h2>
     </div>
-    <div id="story-grid"></div>
+    <div class="story-timeline" id="story-grid"></div>
   </div>
 </section>
 
 <section id="events" style="background: white;">
   <div class="container">
     <div class="text-center">
-      <p class="hero-subtitle" style="margin-bottom: 16px;">Lịch trình</p>
-      <h2 style="font-size: 3.5rem;">Sự Kiện</h2>
+      <p class="hero-subtitle" style="margin-bottom: 12px;">Lịch trình</p>
+      <h2 style="font-size: 3.2rem;">Sự Kiện</h2>
     </div>
     <div class="events-grid" id="events-grid"></div>
   </div>
@@ -208,34 +747,41 @@
 
 <section id="gallery">
   <div class="container text-center">
-    <p class="hero-subtitle" style="margin-bottom: 16px;">Khoảnh khắc</p>
-    <h2 style="font-size: 3.5rem;">Ảnh Kỷ Niệm</h2>
+    <p class="hero-subtitle" style="margin-bottom: 12px;">Khoảnh khắc</p>
+    <h2 style="font-size: 3.2rem;">Ảnh Kỷ Niệm</h2>
     <div class="gallery-grid" id="gallery-grid"></div>
   </div>
 </section>
 
 <section id="rsvp">
   <div class="container text-center">
-    <p class="hero-subtitle" style="margin-bottom: 16px;">Gửi lời chúc</p>
-    <h2 style="font-size: 3.5rem;">Xác Nhận Tham Dự</h2>
+    <p class="hero-subtitle" style="margin-bottom: 12px;">Gửi lời chúc</p>
+    <h2 style="font-size: 3.2rem;">Xác Nhận Tham Dự</h2>
     <div class="rsvp-wrapper">
       <div class="form-group">
         <label>Họ và Tên</label>
-        <input type="text" id="rsvp-name" placeholder="Tên của bạn">
+        <input type="text" id="rsvp-name" placeholder="Ví dụ: Nguyễn Văn A">
       </div>
       <div class="form-group">
         <label>Số điện thoại</label>
-        <input type="tel" id="rsvp-phone" placeholder="090...">
+        <input type="tel" id="rsvp-phone" placeholder="Ví dụ: 0901234567">
       </div>
       <div class="form-group">
         <label>Tham dự</label>
-        <select id="rsvp-attend">
-          <option value="yes">Tôi sẽ tham dự</option>
-          <option value="no">Rất tiếc, tôi không thể</option>
-        </select>
+        <div class="rsvp-choices">
+          <div class="rsvp-choice-card active" data-value="yes">
+            <div class="choice-circle"></div>
+            <div class="choice-label">Tôi sẽ tham dự</div>
+          </div>
+          <div class="rsvp-choice-card" data-value="no">
+            <div class="choice-circle"></div>
+            <div class="choice-label">Rất tiếc, không thể tham dự</div>
+          </div>
+        </div>
+        <input type="hidden" id="rsvp-attend" value="yes">
       </div>
-      <button class="btn-gold" id="rsvp-submit" style="width: 100%; margin-top: 40px;">Gửi Xác Nhận</button>
-      <div id="rsvp-message" style="margin-top: 24px;"></div>
+      <button class="btn-gold" id="rsvp-submit" style="width: 100%; margin-top: 24px;">Gửi Xác Nhận</button>
+      <div id="rsvp-message" style="margin-top: 20px; text-align: center; font-weight: 500;"></div>
     </div>
   </div>
 </section>
@@ -243,10 +789,33 @@
 <footer>
   <div class="container">
     <div class="footer-names" id="footer-names"></div>
-    <p style="letter-spacing: 0.2em; text-transform: uppercase; font-size: 0.7rem; color: var(--text-light);" id="footer-message"></p>
+    <p style="letter-spacing: 0.15em; text-transform: uppercase; font-size: 0.7rem; color: var(--text-light);" id="footer-message"></p>
   </div>
 </footer>
 
+<!-- Floating Music Player -->
+<div id="music-player" class="music-player">
+  <div class="disc-wrapper">
+    <div class="music-disc">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width: 18px; height: 18px;">
+        <circle cx="12" cy="12" r="10"/>
+        <circle cx="12" cy="12" r="3"/>
+        <path d="M12 12V6l4 2-4 4z"/>
+      </svg>
+    </div>
+    <div class="sound-waves">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+  <audio id="bg-music" loop>
+    <source src="" type="audio/mp3">
+  </audio>
+</div>
+
+<!-- LIBRARIES -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
@@ -255,10 +824,12 @@
 
 <script>
 (async function() {
+  // Smooth scroll
   const lenis = new Lenis();
   function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
   requestAnimationFrame(raf);
 
+  // Fetch configs
   let config;
   try {
     const res = await fetch('config.json?v=' + Date.now());
@@ -268,6 +839,7 @@
     return;
   }
 
+  // Bind values
   const {bride, groom} = config.couple;
   document.getElementById('bride-name').textContent = bride.name;
   document.getElementById('groom-name').textContent = groom.name;
@@ -276,37 +848,111 @@
   document.getElementById('footer-names').textContent = bride.name + ' & ' + groom.name;
   document.getElementById('footer-message').textContent = config.footer.message;
 
+  // Bind SEO
+  if (config.seo) {
+    document.title = config.seo.title || (bride.name + " & " + groom.name + " — Thiệp Cưới");
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) metaDesc.setAttribute("content", config.seo.description || "");
+  }
+
+  // Populate Story
   const sg = document.getElementById('story-grid');
   config.story.forEach((item, i) => {
+    const isEven = i % 2 === 0;
     sg.innerHTML += `
-      <div class="story-item gsap-reveal">
-        <div class="story-image">
-          <img src="${item.image || 'img/eng_pics/1.jpg'}" alt="${item.title}">
+      <div class="timeline-item gsap-reveal">
+        <div class="timeline-dot"></div>
+        <div class="timeline-left ${isEven ? '' : 'timeline-image-wrapper'}">
+          ${isEven ? `
+            <div class="timeline-year">${item.year}</div>
+            <h3 class="timeline-title">${item.title}</h3>
+            <p class="timeline-content">${item.content}</p>
+          ` : `
+            <a data-fancybox="gallery" href="${item.image || 'img/eng_pics/story_1.png'}">
+              <img src="${item.image || 'img/eng_pics/story_1.png'}" alt="${item.title}">
+            </a>
+          `}
         </div>
-        <div class="story-content">
-          <div class="story-year">${item.year}</div>
-          <h3 class="story-title">${item.title}</h3>
-          <p class="story-text">${item.content}</p>
+        <div class="timeline-right ${isEven ? 'timeline-image-wrapper' : ''}">
+          ${isEven ? `
+            <a data-fancybox="gallery" href="${item.image || 'img/eng_pics/story_1.png'}">
+              <img src="${item.image || 'img/eng_pics/story_1.png'}" alt="${item.title}">
+            </a>
+          ` : `
+            <div class="timeline-year">${item.year}</div>
+            <h3 class="timeline-title">${item.title}</h3>
+            <p class="timeline-content">${item.content}</p>
+          `}
         </div>
       </div>
     `;
   });
 
+  // Populate Events
   const eg = document.getElementById('events-grid');
   config.events.forEach((ev, i) => {
+    let iconSvg = '';
+    if (i === 0) { // Lễ Vu Quy
+      iconSvg = `
+        <svg class="event-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" style="width: 48px; height: 48px; margin: 0 auto 24px; color: var(--gold);">
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M12 5c-1.5-2.5-4.5-2.5-6 0s-.5 5 2 6.5S12 12 12 12s2.5.5 4 2 3.5 1.5 3.5-1-1-4.5-4-6.5S12 5 12 5z"/>
+          <path d="M12 19c1.5 2.5 4.5 2.5 6 0s.5-5-2-6.5S12 12 12 12s-2.5-.5-4-2-3.5-1.5-3.5 1 1 4.5 4 6.5s4-1 4-1z"/>
+        </svg>
+      `;
+    } else if (i === 1) { // Lễ Rước Dâu
+      iconSvg = `
+        <svg class="event-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" style="width: 48px; height: 48px; margin: 0 auto 24px; color: var(--gold);">
+          <circle cx="9.5" cy="13" r="5.5"/>
+          <circle cx="14.5" cy="11" r="5.5"/>
+          <path d="M8 8.5L9.5 7l1.5 1.5m2.5-3L15 4l1.5 1.5"/>
+        </svg>
+      `;
+    } else { // Tiệc Cưới
+      iconSvg = `
+        <svg class="event-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" style="width: 48px; height: 48px; margin: 0 auto 24px; color: var(--gold);">
+          <path d="M6 3h12l-1 9H7L6 3zM12 12v7M9 19h6M16 5l1.5-1.5M6.5 5.5l-1-1"/>
+          <circle cx="12" cy="7" r="1"/>
+          <circle cx="9" cy="6" r="1.5"/>
+          <circle cx="15" cy="8" r="0.8"/>
+        </svg>
+      `;
+    }
+    
     eg.innerHTML += `
       <div class="event-card gsap-reveal">
-        <div class="event-info">${ev.date} — ${ev.time}</div>
-        <h3>${ev.name}</h3>
-        <p style="margin-bottom: 24px;">${ev.address}</p>
-        <a href="${config.venue.googleMapsUrl}" target="_blank" class="btn-gold" style="padding: 12px 32px; font-size: 0.6rem;">Bản đồ</a>
+        <div>
+          ${iconSvg}
+          <h3 class="event-title">${ev.name}</h3>
+          <div class="event-details">
+            <div class="event-detail-item">
+              <i class="fa-regular fa-calendar"></i>
+              <span>${ev.date}</span>
+            </div>
+            <div class="event-detail-item">
+              <i class="fa-regular fa-clock"></i>
+              <span>${ev.time}</span>
+            </div>
+            <div class="event-detail-item" style="align-items: flex-start;">
+              <i class="fa-solid fa-location-dot" style="margin-top: 4px;"></i>
+              <div style="display: flex; flex-direction: column;">
+                <strong>${ev.location}</strong>
+                <span style="font-size: 0.8rem; margin-top: 2px;">${ev.address}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <a href="${config.venue.googleMapsUrl}" target="_blank" class="btn-gold" style="padding: 14px 28px; font-size: 0.65rem; border-radius: 8px;">
+          <i class="fa-solid fa-map-location-dot"></i>Xem bản đồ
+        </a>
       </div>`;
   });
 
+  // Populate Gallery
   const gg = document.getElementById('gallery-grid');
   config.gallery.forEach((img, i) => {
     gg.innerHTML += `
-      <div class="gallery-item gsap-reveal">
+      <div class="gallery-item item-${i} gsap-reveal">
         <a data-fancybox="gallery" href="${img.fullSrc}">
           <img src="${img.src}" alt="${img.alt}">
         </a>
@@ -317,18 +963,21 @@
   
   // Hero Entrance
   gsap.from(".hero-names span", { 
-    y: 120, opacity: 0, duration: 2.5, stagger: 0.15, ease: "expo.out", delay: 0.5 
+    y: 60, opacity: 0, duration: 2, stagger: 0.15, ease: "power4.out", delay: 0.5 
   });
   gsap.from(".hero-subtitle", { 
-    y: 20, opacity: 0, duration: 2, ease: "expo.out", delay: 1.2 
+    y: 20, opacity: 0, duration: 1.5, ease: "power3.out", delay: 1.1 
   });
-  gsap.from(".hero-date", { 
-    y: -20, opacity: 0, duration: 2, ease: "expo.out", delay: 1.4 
+  gsap.from(".hero-date-wrapper", { 
+    y: 20, opacity: 0, duration: 1.5, ease: "power3.out", delay: 1.3 
+  });
+  gsap.from(".hero-frame", {
+    scale: 0.95, opacity: 0, duration: 2.2, ease: "power4.out", delay: 0.7
   });
 
-  // Hero Parallax
-  gsap.to("#hero-bg", {
-    yPercent: 30,
+  // Hero Parallax (smooth scroll effect)
+  gsap.to("#hero-img", {
+    yPercent: 12,
     ease: "none",
     scrollTrigger: {
       trigger: "#hero",
@@ -341,7 +990,7 @@
   // Scroll Reveals
   gsap.utils.toArray(".gsap-reveal").forEach(el => {
     gsap.from(el, {
-      y: 60, opacity: 0, duration: 1.5, ease: "expo.out",
+      y: 40, opacity: 0, duration: 1.2, ease: "power3.out",
       scrollTrigger: { 
         trigger: el, 
         start: "top 90%",
@@ -351,9 +1000,9 @@
   });
 
   // Story Image Parallax
-  gsap.utils.toArray(".story-image img").forEach(img => {
+  gsap.utils.toArray(".timeline-image-wrapper img").forEach(img => {
     gsap.to(img, {
-      yPercent: 15,
+      yPercent: 8,
       ease: "none",
       scrollTrigger: {
         trigger: img.parentElement,
@@ -364,36 +1013,137 @@
     });
   });
 
-  // Magnetic Button Effect (Simplified)
-  const btn = document.querySelector('.btn-gold');
-  if (btn) {
-    btn.addEventListener('mousemove', (e) => {
-      const { left, top, width, height } = btn.getBoundingClientRect();
-      const x = (e.clientX - left - width / 2) * 0.2;
-      const y = (e.clientY - top - height / 2) * 0.2;
-      gsap.to(btn, { x, y, duration: 0.3, ease: "power2.out" });
+  // Navigation state toggle on scroll
+  const handleNavScroll = () => {
+    document.getElementById('main-nav').classList.toggle('scrolled', window.scrollY > 50);
+  };
+  window.addEventListener('scroll', handleNavScroll);
+  handleNavScroll(); // Run initially
+
+  // RSVP Selection Card logic
+  const choiceCards = document.querySelectorAll('.rsvp-choice-card');
+  const attendInput = document.getElementById('rsvp-attend');
+  choiceCards.forEach(card => {
+    card.addEventListener('click', () => {
+      choiceCards.forEach(c => c.classList.remove('active'));
+      card.classList.add('active');
+      attendInput.value = card.getAttribute('data-value');
     });
-    btn.addEventListener('mouseleave', () => {
-      gsap.to(btn, { x: 0, y: 0, duration: 0.6, ease: "elastic.out(1, 0.3)" });
+  });
+
+  // RSVP Submit with API POST integration
+  const rsvpSubmitBtn = document.getElementById('rsvp-submit');
+  const rsvpMessage = document.getElementById('rsvp-message');
+  
+  rsvpSubmitBtn.addEventListener('click', async () => {
+    const name = document.getElementById('rsvp-name').value.trim();
+    const phone = document.getElementById('rsvp-phone').value.trim();
+    const attend = attendInput.value;
+    
+    if (!name) {
+      alert('Vui lòng nhập họ và tên của bạn.');
+      return;
+    }
+    
+    rsvpSubmitBtn.disabled = true;
+    rsvpSubmitBtn.textContent = 'Đang gửi...';
+    rsvpMessage.innerHTML = '';
+    
+    const scriptUrl = config.rsvp.googleSheetUrl;
+    
+    if (!scriptUrl || scriptUrl.includes('YOUR_GOOGLE_APPS_SCRIPT_URL')) {
+      // Offline fallback success for local demo
+      setTimeout(() => {
+        rsvpSubmitBtn.disabled = false;
+        rsvpSubmitBtn.textContent = 'Gửi Xác Nhận';
+        rsvpMessage.innerHTML = config.rsvp.thankYouMessage || 'Cảm ơn bạn đã xác nhận!';
+        rsvpMessage.style.color = 'var(--gold-dark)';
+      }, 1000);
+      return;
+    }
+    
+    try {
+      const url = `${scriptUrl}?name=${encodeURIComponent(name)}&phone=${encodeURIComponent(phone)}&attend=${encodeURIComponent(attend)}`;
+      await fetch(url, { method: 'GET', mode: 'no-cors' });
+      
+      rsvpSubmitBtn.disabled = false;
+      rsvpSubmitBtn.textContent = 'Gửi Xác Nhận';
+      rsvpMessage.innerHTML = config.rsvp.thankYouMessage || 'Cảm ơn bạn đã xác nhận!';
+      rsvpMessage.style.color = 'var(--gold-dark)';
+      
+      // Clear inputs
+      document.getElementById('rsvp-name').value = '';
+      document.getElementById('rsvp-phone').value = '';
+    } catch (error) {
+      console.error('Error submitting RSVP:', error);
+      rsvpSubmitBtn.disabled = false;
+      rsvpSubmitBtn.textContent = 'Gửi Xác Nhận';
+      rsvpMessage.innerHTML = 'Có lỗi xảy ra khi gửi xác nhận. Vui lòng thử lại sau.';
+      rsvpMessage.style.color = 'red';
+    }
+  });
+
+  // Music Player
+  const bgMusic = document.getElementById('bg-music');
+  const musicPlayer = document.getElementById('music-player');
+  
+  if (config.music && config.music.enabled) {
+    bgMusic.src = config.music.src;
+    
+    if (config.music.autoplay) {
+      const playOnUserGesture = () => {
+        bgMusic.play().then(() => {
+          musicPlayer.classList.add('playing');
+        }).catch(e => console.log('Autoplay blocked, waiting for interaction'));
+        document.removeEventListener('click', playOnUserGesture);
+        document.removeEventListener('touchstart', playOnUserGesture);
+      };
+      document.addEventListener('click', playOnUserGesture, { passive: true });
+      document.addEventListener('touchstart', playOnUserGesture, { passive: true });
+    }
+    
+    musicPlayer.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (bgMusic.paused) {
+        bgMusic.play();
+        musicPlayer.classList.add('playing');
+      } else {
+        bgMusic.pause();
+        musicPlayer.classList.remove('playing');
+      }
     });
+  } else {
+    musicPlayer.style.display = 'none';
   }
 
+  // Initialize fancybox light-box
+  // Initialize fancybox light-box with dynamic delegation
+  $().fancybox({
+    selector: '[data-fancybox="gallery"]',
+    hash: false,
+    buttons: ['zoom','close'],
+    loop: true,
+    afterShow: function(instance, current) {
+      try {
+        lenis.stop();
+      } catch(e) {}
+    },
+    afterClose: function(instance, current) {
+      try {
+        lenis.start();
+      } catch(e) {}
+    }
+  });
+
+  // Extra safety fallback to block browser default link navigation on gallery clicks
+  $(document).on('click', '[data-fancybox="gallery"]', function(e) {
+    e.preventDefault();
+  });
+
+  // Fade out loader screen
   setTimeout(() => {
     document.getElementById('loading-screen').classList.add('hidden');
   }, 1000);
-
-  window.addEventListener('scroll', () => {
-    document.getElementById('main-nav').classList.toggle('scrolled', window.scrollY > 100);
-  });
-
-  // RSVP Submit (Simplified for now)
-  document.getElementById('rsvp-submit').addEventListener('click', () => {
-    const msg = document.getElementById('rsvp-message');
-    msg.innerHTML = "Cảm ơn bạn đã xác nhận!";
-    msg.style.color = "var(--gold)";
-  });
-
-  $('[data-fancybox="gallery"]').fancybox({buttons: ['zoom','close'], loop: true});
 })();
 </script>
 </body>

@@ -63,57 +63,47 @@
       "year": "2019",
       "title": "Lần Đầu Gặp Gỡ",
       "content": "Khoa và Anh lần đầu gặp nhau tại một buổi tiệc tất niên của công ty. Khoa bị ấn tượng ngay bởi nụ cười rạng rỡ của Anh, còn Anh lại thích sự hài hước duyên dáng của Khoa. Cả hai đã trò chuyện cả đêm mà không biết thời gian trôi qua.",
-      "image": "img/eng_pics/_RFX2942-sm.jpg"
+      "image": "img/eng_pics/story_1.png"
     },
     {
       "year": "2020",
       "title": "Chính Thức Hẹn Hò",
       "content": "Sau nhiều tháng làm bạn, Khoa đã dũng cảm thú nhận tình cảm của mình trong một buổi chiều tà tại công viên Tao Đàn. Anh đã gật đầu đồng ý và từ đó, hai người chính thức bước vào hành trình yêu đương đẹp đẽ.",
-      "image": "img/eng_pics/IMG_3483-sm.jpg"
+      "image": "img/eng_pics/story_2.png"
     },
     {
       "year": "2022",
       "title": "Vượt Qua Thử Thách",
       "content": "Đại dịch Covid-19 đã thử thách tình cảm của đôi uyên ương, nhưng cũng chính thời gian đó giúp họ hiểu nhau sâu sắc hơn. Những cuộc gọi video dài bất tận, những tin nhắn quan tâm mỗi sáng - tình yêu của họ ngày càng vững chắc.",
-      "image": "img/eng_pics/_RFX2992-sm.jpg"
+      "image": "img/eng_pics/story_3.png"
     },
     {
       "year": "2024",
       "title": "Cầu Hôn",
       "content": "Trong chuyến du lịch Đà Lạt lãng mạn, Khoa đã quỳ xuống cầu hôn Anh ngay giữa vườn hoa rực rỡ. Anh đã bật khóc và gật đầu ngay lập tức - khoảnh khắc đó sẽ mãi mãi là ký ức đẹp nhất trong cuộc đời họ.",
-      "image": "img/eng_pics/_RFX3064-sm.jpg"
+      "image": "img/eng_pics/story_4.png"
     }
   ],
   "gallery": [
     {
-      "src": "img/eng_pics/_RFX2942-sm.jpg",
-      "fullSrc": "img/eng_pics/_RFX2942-lg.jpg",
+      "src": "img/eng_pics/story_1.png",
+      "fullSrc": "img/eng_pics/story_1.png",
       "alt": "Ảnh đôi 1"
     },
     {
-      "src": "img/eng_pics/IMG_3483-sm.jpg",
-      "fullSrc": "img/eng_pics/IMG_3483-lg.jpg",
+      "src": "img/eng_pics/story_2.png",
+      "fullSrc": "img/eng_pics/story_2.png",
       "alt": "Ảnh đôi 2"
     },
     {
-      "src": "img/eng_pics/_RFX2992-sm.jpg",
-      "fullSrc": "img/eng_pics/_RFX2992-lg.jpg",
+      "src": "img/eng_pics/story_3.png",
+      "fullSrc": "img/eng_pics/story_3.png",
       "alt": "Ảnh đôi 3"
     },
     {
-      "src": "img/eng_pics/_RFX3064-sm.jpg",
-      "fullSrc": "img/eng_pics/_RFX3064-lg.jpg",
+      "src": "img/eng_pics/story_4.png",
+      "fullSrc": "img/eng_pics/story_4.png",
       "alt": "Ảnh đôi 4"
-    },
-    {
-      "src": "img/eng_pics/NGP_4089-sm.jpg",
-      "fullSrc": "img/eng_pics/NGP_4089-lg.jpg",
-      "alt": "Ảnh đôi 5"
-    },
-    {
-      "src": "img/eng_pics/NGP_4119-sm.jpg",
-      "fullSrc": "img/eng_pics/NGP_4119-lg.jpg",
-      "alt": "Ảnh đôi 6"
     }
   ],
   "music": {
@@ -125,7 +115,7 @@
   "seo": {
     "title": "Đám Cưới Ngọc Anh & Minh Khoa - 20/12/2025",
     "description": "Trân trọng kính mời bạn đến dự lễ thành hôn của Ngọc Anh & Minh Khoa vào ngày 20 tháng 12 năm 2025.",
-    "ogImage": "img/hero-min.jpg",
+    "ogImage": "img/hero-min.png",
     "siteUrl": "https://wedding-ankhoa.vercel.app"
   },
   "rsvp": {
