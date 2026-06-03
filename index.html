@@ -681,6 +681,45 @@
     .fancybox-button {
       pointer-events: auto !important;
     }
+
+    /* QR Code Sharing Section Styles */
+    .qr-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .qr-frame {
+      background: var(--cream);
+      border: 1px solid rgba(189, 160, 115, 0.25);
+      padding: 32px;
+      border-radius: 20px;
+      box-shadow: 0 15px 45px rgba(184, 156, 109, 0.05);
+      max-width: 260px;
+      width: 100%;
+      position: relative;
+      transition: var(--transition-soft);
+    }
+    .qr-frame:hover {
+      transform: translateY(-5px);
+      border-color: var(--gold);
+      box-shadow: 0 25px 60px rgba(184, 156, 109, 0.1);
+    }
+    .qr-frame img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      border: 1px solid rgba(0, 0, 0, 0.02);
+    }
+    .qr-monogram {
+      font-family: var(--font-serif);
+      font-size: 1.1rem;
+      letter-spacing: 0.2em;
+      color: var(--gold-dark);
+      margin-top: 16px;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
   </style>
 </head>
 <body>
@@ -782,6 +821,27 @@
       </div>
       <button class="btn-gold" id="rsvp-submit" style="width: 100%; margin-top: 24px;">Gửi Xác Nhận</button>
       <div id="rsvp-message" style="margin-top: 20px; text-align: center; font-weight: 500;"></div>
+    </div>
+  </div>
+</section>
+
+<section id="qr-share" style="background: white; padding: 100px 0;">
+  <div class="container text-center">
+    <p class="hero-subtitle" style="margin-bottom: 12px;">Chia sẻ</p>
+    <h2 style="font-size: 3.2rem; margin-bottom: 24px;">Thiệp Cưới Di Động</h2>
+    <p style="max-width: 500px; margin: 0 auto 40px; color: var(--text-light); font-size: 0.95rem;">
+      Quét hoặc tải mã QR chính thức dưới đây để lưu giữ và chia sẻ nhanh thiệp cưới di động của chúng tôi với gia đình và bạn bè.
+    </p>
+    <div class="qr-container gsap-reveal">
+      <div class="qr-frame">
+        <img src="img/qr-code.png" alt="Mã QR Thiệp Cưới">
+        <div class="qr-monogram">A & K</div>
+      </div>
+      <div style="margin-top: 32px;">
+        <a href="img/qr-code.png" download="Ma-QR-Dam-Cuoi-Anh-Khoa.png" class="btn-gold" style="padding: 14px 28px; font-size: 0.65rem; border-radius: 8px;">
+          <i class="fa-solid fa-download"></i> Tải mã QR về máy
+        </a>
+      </div>
     </div>
   </div>
 </section>
